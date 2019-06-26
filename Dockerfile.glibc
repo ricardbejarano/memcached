@@ -1,0 +1,34 @@
+FROM debian AS build
+
+ARG MEMCACHED_VERSION="1.5.16"
+ARG MEMCACHED_CHECKSUM="45a22c890dc1edb27db567fb4c9c25b91bfd578477c08c5fb10dca93cc62cc5a"
+
+ADD http://www.memcached.org/files/memcached-$MEMCACHED_VERSION.tar.gz /tmp/memcached.tar.gz
+
+RUN if [ "$MEMCACHED_CHECKSUM" != "$(sha256sum /tmp/memcached.tar.gz | awk '{print $1}')" ]; then exit 1; fi && \
+    tar -C /tmp -xf /tmp/memcached.tar.gz && \
+    mv /tmp/memcached-$MEMCACHED_VERSION /tmp/memcached
+
+RUN apt update && \
+    apt install -y gcc make libevent-dev && \
+    cd /tmp/memcached && \
+      ./configure && \
+      make \
+        CFLAGS="-fstack-protector-all" \
+        LDFLAGS="-lpthread -z relro -z now"
+
+
+FROM scratch
+
+COPY --from=build /lib/x86_64-linux-gnu/libc.so.6 \
+                  /lib/x86_64-linux-gnu/libpthread.so.0 \
+                  /usr/lib/x86_64-linux-gnu/libevent-2.0.so.5 \
+                  /lib/x86_64-linux-gnu/
+COPY --from=build /lib64/ld-linux-x86-64.so.2 /lib64/
+COPY --from=build /tmp/memcached/memcached /
+
+COPY rootfs /
+
+USER memcached:memcached
+EXPOSE 11211/tcp
+ENTRYPOINT ["/memcached"]

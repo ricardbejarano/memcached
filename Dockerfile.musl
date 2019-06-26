@@ -1,0 +1,29 @@
+FROM alpine AS build
+
+ARG MEMCACHED_VERSION="1.5.16"
+ARG MEMCACHED_CHECKSUM="45a22c890dc1edb27db567fb4c9c25b91bfd578477c08c5fb10dca93cc62cc5a"
+
+ADD http://www.memcached.org/files/memcached-$MEMCACHED_VERSION.tar.gz /tmp/memcached.tar.gz
+
+RUN if [ "$MEMCACHED_CHECKSUM" != "$(sha256sum /tmp/memcached.tar.gz | awk '{print $1}')" ]; then exit 1; fi && \
+    tar -C /tmp -xf /tmp/memcached.tar.gz && \
+    mv /tmp/memcached-$MEMCACHED_VERSION /tmp/memcached
+
+RUN apk add gcc make musl-dev libevent-dev && \
+    cd /tmp/memcached && \
+      ./configure && \
+      make
+
+
+FROM scratch
+
+COPY --from=build /lib/ld-musl-x86_64.so.1 \
+                  /usr/lib/libevent-2.1.so.6 \
+                  /lib/
+COPY --from=build /tmp/memcached/memcached /
+
+COPY rootfs /
+
+EXPOSE 11211/tcp
+ENTRYPOINT ["/memcached"]
+CMD ["-u", "memcached"]
