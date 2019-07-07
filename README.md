@@ -1,5 +1,5 @@
 <p align=center><img src=https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/198/rabbit-face_1f430.png width=120px></p>
-<h1 align=center>memcached</h1>
+<h1 align=center>memcached (container image)</h1>
 <p align=center>Built-from-source container image of the <a href=https://memcached.org/>Memcached in-memory key-value store</a></p>
 
 
