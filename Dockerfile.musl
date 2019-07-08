@@ -16,10 +16,10 @@ RUN [ "$LIBEVENT_CHECKSUM" = "$(sha256sum /tmp/libevent.tar.gz | awk '{print $1}
     mv /tmp/memcached-$MEMCACHED_VERSION /tmp/memcached
 
 RUN apk add gcc make musl-dev && \
-		cd /tmp/libevent-$LIBEVENT_VERSION && \
-			./configure && \
-			make && \
-			make install && \
+    cd /tmp/libevent-$LIBEVENT_VERSION && \
+      ./configure && \
+      make && \
+      make install && \
     cd /tmp/memcached && \
       ./configure && \
       make \
