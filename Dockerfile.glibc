@@ -5,7 +5,7 @@ ARG MEMCACHED_CHECKSUM="45a22c890dc1edb27db567fb4c9c25b91bfd578477c08c5fb10dca93
 
 ADD http://www.memcached.org/files/memcached-$MEMCACHED_VERSION.tar.gz /tmp/memcached.tar.gz
 
-RUN if [ "$MEMCACHED_CHECKSUM" != "$(sha256sum /tmp/memcached.tar.gz | awk '{print $1}')" ]; then exit 1; fi && \
+RUN [ "$MEMCACHED_CHECKSUM" = "$(sha256sum /tmp/memcached.tar.gz | awk '{print $1}')" ] && \
     tar -C /tmp -xf /tmp/memcached.tar.gz && \
     mv /tmp/memcached-$MEMCACHED_VERSION /tmp/memcached
 
