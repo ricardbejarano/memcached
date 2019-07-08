@@ -22,7 +22,7 @@ Available on [Quay](https://quay.io) as:
 
 ## Features
 
-* Super tiny (`glibc`-based is `~2.52MB` and `musl`-based is `~1.64MB`)
+* Super tiny (`glibc`-based is `~3.6MB` and `musl`-based is `~1.64MB`)
 * Compiled from source during build time
 * Built `FROM scratch`, see [Filesystem](#filesystem) for an exhaustive list of the image's contents
 * Reduced attack surface (no shell, no UNIX tools, no package manager...)
@@ -60,16 +60,13 @@ Based on the [glibc](https://www.gnu.org/software/libc/) implementation of `libc
 
 ### `musl`
 
-Based on the [musl](https://www.musl-libc.org/) implementation of `libc`. Dynamically linked.
+Based on the [musl](https://www.musl-libc.org/) implementation of `libc`. Statically linked.
 
 ```
 /
 ├── etc/
 │   ├── group
 │   └── passwd
-├── lib/
-│   ├── ld-musl-x86_64.so.1
-│   └── libevent-2.1.so.6
 └── memcached
 ```
 

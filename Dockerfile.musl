@@ -1,29 +1,37 @@
 FROM alpine AS build
 
+ARG LIBEVENT_VERSION="2.1.10-stable"
+ARG LIBEVENT_CHECKSUM="e864af41a336bb11dab1a23f32993afe963c1f69618bd9292b89ecf6904845b0"
+
 ARG MEMCACHED_VERSION="1.5.16"
 ARG MEMCACHED_CHECKSUM="45a22c890dc1edb27db567fb4c9c25b91bfd578477c08c5fb10dca93cc62cc5a"
 
+ADD https://github.com/libevent/libevent/releases/download/release-$LIBEVENT_VERSION/libevent-$LIBEVENT_VERSION.tar.gz /tmp/libevent.tar.gz
 ADD http://www.memcached.org/files/memcached-$MEMCACHED_VERSION.tar.gz /tmp/memcached.tar.gz
 
-RUN [ "$MEMCACHED_CHECKSUM" = "$(sha256sum /tmp/memcached.tar.gz | awk '{print $1}')" ] && \
+RUN [ "$LIBEVENT_CHECKSUM" = "$(sha256sum /tmp/libevent.tar.gz | awk '{print $1}')" ] && \
+    [ "$MEMCACHED_CHECKSUM" = "$(sha256sum /tmp/memcached.tar.gz | awk '{print $1}')" ] && \
+    tar -C /tmp -xf /tmp/libevent.tar.gz && \
     tar -C /tmp -xf /tmp/memcached.tar.gz && \
     mv /tmp/memcached-$MEMCACHED_VERSION /tmp/memcached
 
-RUN apk add gcc make musl-dev libevent-dev && \
+RUN apk add gcc make musl-dev && \
+		cd /tmp/libevent-$LIBEVENT_VERSION && \
+			./configure && \
+			make && \
+			make install && \
     cd /tmp/memcached && \
       ./configure && \
-      make
+      make \
+        CFLAGS="-static"
 
 
 FROM scratch
 
-COPY --from=build /lib/ld-musl-x86_64.so.1 \
-                  /usr/lib/libevent-2.1.so.6 \
-                  /lib/
 COPY --from=build /tmp/memcached/memcached /
 
 COPY rootfs /
 
+USER 100:100
 EXPOSE 11211/tcp
 ENTRYPOINT ["/memcached"]
-CMD ["-u", "memcached"]
