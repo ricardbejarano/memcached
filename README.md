@@ -1,6 +1,6 @@
-<p align=center><img src=https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/198/rabbit-face_1f430.png width=120px></p>
-<h1 align=center>memcached (container image)</h1>
-<p align=center>Built-from-source container image of the <a href=https://memcached.org/>Memcached in-memory key-value store</a></p>
+<p align="center"><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/120/apple/198/rabbit-face_1f430.png" width="120px"></p>
+<h1 align="center">memcached (container image)</h1>
+<p align="center">Built-from-source container image of the <a href="https://memcached.org/">Memcached in-memory key-value store</a></p>
 
 
 ## Tags
@@ -22,11 +22,11 @@ Available on [Quay](https://quay.io) as:
 
 ## Features
 
-* Super tiny (`glibc`-based is `~3.6MB` and `musl`-based is `~1.64MB`)
-* Compiled from source during build time
-* Built `FROM scratch`, see [Filesystem](#filesystem) for an exhaustive list of the image's contents
+* Super tiny (`glibc`-based image is about `3.6MB`, `musl`-based image is about `1.64MB`)
+* Compiled from source (with binary exploit mitigations) during build time
+* Built `FROM scratch`, with zero bloat (see [Filesystem](#filesystem))
 * Reduced attack surface (no shell, no UNIX tools, no package manager...)
-* Built with binary exploit mitigations enabled
+* Runs as unprivileged (non-`root`) user
 
 
 ## Building
@@ -36,8 +36,6 @@ Available on [Quay](https://quay.io) as:
 
 
 ## Filesystem
-
-The images' contents are:
 
 ### `glibc`
 

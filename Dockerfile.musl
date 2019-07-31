@@ -23,14 +23,17 @@ RUN apk add gcc make musl-dev && \
     cd /tmp/memcached && \
       ./configure && \
       make \
-        CFLAGS="-static"
+        CFLAGS="-static" && \
+    echo "nogroup:*:100:nobody" > /tmp/group && \
+    echo "nobody:*:100:100:::" > /tmp/passwd
 
 
 FROM scratch
 
-COPY --from=build /tmp/memcached/memcached /
-
-COPY rootfs /
+COPY --from=build --chown=100:100 /tmp/memcached/memcached /
+COPY --from=build --chown=100:100 /tmp/group \
+                                  /tmp/passwd \
+                                  /etc/
 
 USER 100:100
 EXPOSE 11211/tcp
