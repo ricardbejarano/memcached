@@ -49,7 +49,7 @@ Based on the [glibc](https://www.gnu.org/software/libc/) implementation of `libc
 ├── lib/
 │   └── x86_64-linux-gnu/
 │       ├── libc.so.6
-│       ├── libevent-2.0.so.5
+│       ├── libevent-2.1.so.7
 │       └── libpthread.so.0
 ├── lib64/
 │   └── ld-linux-x86-64.so.2
