@@ -3,8 +3,8 @@ FROM alpine:3 AS build
 ARG LIBEVENT_VERSION="2.1.11-stable"
 ARG LIBEVENT_CHECKSUM="a65bac6202ea8c5609fd5c7e480e6d25de467ea1917c08290c521752f147283d"
 
-ARG MEMCACHED_VERSION="1.5.18"
-ARG MEMCACHED_CHECKSUM="0bf8154f53d2781164421acd195a1665ac2f77316263c3526206c38e402c4b0d"
+ARG MEMCACHED_VERSION="1.5.17"
+ARG MEMCACHED_CHECKSUM="ac7c5af6e8b1acf5d5c644d162e046d8acf9302174af9f24c3f18e5481ce3a0d"
 
 ADD https://github.com/libevent/libevent/releases/download/release-$LIBEVENT_VERSION/libevent-$LIBEVENT_VERSION.tar.gz /tmp/libevent.tar.gz
 ADD http://www.memcached.org/files/memcached-$MEMCACHED_VERSION.tar.gz /tmp/memcached.tar.gz

@@ -9,15 +9,15 @@
 
 Available on [Docker Hub](https://hub.docker.com) as [`ricardbejarano/memcached`](https://hub.docker.com/r/ricardbejarano/memcached):
 
-- [`1.5.18-glibc`, `1.5.18`, `glibc`, `master`, `latest` *(Dockerfile.glibc)*](https://github.com/ricardbejarano/memcached/blob/master/Dockerfile.glibc)
-- [`1.5.18-musl`, `musl` *(Dockerfile.musl)*](https://github.com/ricardbejarano/memcached/blob/master/Dockerfile.musl)
+- [`1.5.17-glibc`, `1.5.17`, `glibc`, `master`, `latest` *(Dockerfile.glibc)*](https://github.com/ricardbejarano/memcached/blob/master/Dockerfile.glibc)
+- [`1.5.17-musl`, `musl` *(Dockerfile.musl)*](https://github.com/ricardbejarano/memcached/blob/master/Dockerfile.musl)
 
 ### Quay
 
 Available on [Quay](https://quay.io) as:
 
-- [`quay.io/ricardbejarano/memcached-glibc`](https://quay.io/repository/ricardbejarano/memcached-glibc), tags: [`1.5.18`, `master`, `latest` *(Dockerfile.glibc)*](https://github.com/ricardbejarano/memcached/blob/master/Dockerfile.glibc)
-- [`quay.io/ricardbejarano/memcached-musl`](https://quay.io/repository/ricardbejarano/memcached-musl), tags: [`1.5.18`, `master`, `latest` *(Dockerfile.musl)*](https://github.com/ricardbejarano/memcached/blob/master/Dockerfile.musl)
+- [`quay.io/ricardbejarano/memcached-glibc`](https://quay.io/repository/ricardbejarano/memcached-glibc), tags: [`1.5.17`, `master`, `latest` *(Dockerfile.glibc)*](https://github.com/ricardbejarano/memcached/blob/master/Dockerfile.glibc)
+- [`quay.io/ricardbejarano/memcached-musl`](https://quay.io/repository/ricardbejarano/memcached-musl), tags: [`1.5.17`, `master`, `latest` *(Dockerfile.musl)*](https://github.com/ricardbejarano/memcached/blob/master/Dockerfile.musl)
 
 
 ## Features
