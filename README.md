@@ -9,20 +9,20 @@
 
 Available on [Docker Hub](https://hub.docker.com) as [`ricardbejarano/memcached`](https://hub.docker.com/r/ricardbejarano/memcached):
 
-- [`1.5.18-glibc`, `1.5.18`, `glibc`, `master`, `latest` *(Dockerfile.glibc)*](https://github.com/ricardbejarano/memcached/blob/master/Dockerfile.glibc)
-- [`1.5.18-musl`, `musl` *(Dockerfile.musl)*](https://github.com/ricardbejarano/memcached/blob/master/Dockerfile.musl)
+- [`1.5.18-glibc`, `1.5.18`, `glibc`, `master`, `latest` *(Dockerfile.glibc)*](https://github.com/ricardbejarano/memcached/blob/master/Dockerfile.glibc) (about `3.97MB`)
+- [`1.5.18-musl`, `musl` *(Dockerfile.musl)*](https://github.com/ricardbejarano/memcached/blob/master/Dockerfile.musl) (about `1.66MB`)
 
 ### Quay
 
 Available on [Quay](https://quay.io) as:
 
-- [`quay.io/ricardbejarano/memcached-glibc`](https://quay.io/repository/ricardbejarano/memcached-glibc), tags: [`1.5.18`, `master`, `latest` *(Dockerfile.glibc)*](https://github.com/ricardbejarano/memcached/blob/master/Dockerfile.glibc)
-- [`quay.io/ricardbejarano/memcached-musl`](https://quay.io/repository/ricardbejarano/memcached-musl), tags: [`1.5.18`, `master`, `latest` *(Dockerfile.musl)*](https://github.com/ricardbejarano/memcached/blob/master/Dockerfile.musl)
+- [`quay.io/ricardbejarano/memcached-glibc`](https://quay.io/repository/ricardbejarano/memcached-glibc), tags: [`1.5.18`, `master`, `latest` *(Dockerfile.glibc)*](https://github.com/ricardbejarano/memcached/blob/master/Dockerfile.glibc) (about `3.97MB`)
+- [`quay.io/ricardbejarano/memcached-musl`](https://quay.io/repository/ricardbejarano/memcached-musl), tags: [`1.5.18`, `master`, `latest` *(Dockerfile.musl)*](https://github.com/ricardbejarano/memcached/blob/master/Dockerfile.musl) (about `1.66MB`)
 
 
 ## Features
 
-* Super tiny (`glibc`-based image is about `3.6MB`, `musl`-based image is about `1.64MB`)
+* Super tiny (see [Tags](#tags))
 * Compiled from source (with binary exploit mitigations) during build time
 * Built `FROM scratch`, with zero bloat (see [Filesystem](#filesystem))
 * Reduced attack surface (no shell, no UNIX tools, no package manager...)
