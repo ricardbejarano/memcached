@@ -3,17 +3,17 @@ FROM alpine:3 AS build
 ARG LIBEVENT_VERSION="2.1.11-stable"
 ARG LIBEVENT_CHECKSUM="a65bac6202ea8c5609fd5c7e480e6d25de467ea1917c08290c521752f147283d"
 
-ARG MEMCACHED_VERSION="1.5.18"
-ARG MEMCACHED_CHECKSUM="9ebdd6705b06da70eb6f68245686554b1cb689f00b9bff6e33672c1a0125ef88"
+ARG VERSION="1.5.18"
+ARG CHECKSUM="9ebdd6705b06da70eb6f68245686554b1cb689f00b9bff6e33672c1a0125ef88"
 
 ADD https://github.com/libevent/libevent/releases/download/release-$LIBEVENT_VERSION/libevent-$LIBEVENT_VERSION.tar.gz /tmp/libevent.tar.gz
-ADD http://www.memcached.org/files/memcached-$MEMCACHED_VERSION.tar.gz /tmp/memcached.tar.gz
+ADD http://www.memcached.org/files/memcached-$VERSION.tar.gz /tmp/memcached.tar.gz
 
 RUN [ "$LIBEVENT_CHECKSUM" = "$(sha256sum /tmp/libevent.tar.gz | awk '{print $1}')" ] && \
-    [ "$MEMCACHED_CHECKSUM" = "$(sha256sum /tmp/memcached.tar.gz | awk '{print $1}')" ] && \
+    [ "$CHECKSUM" = "$(sha256sum /tmp/memcached.tar.gz | awk '{print $1}')" ] && \
     tar -C /tmp -xf /tmp/libevent.tar.gz && \
     tar -C /tmp -xf /tmp/memcached.tar.gz && \
-    mv /tmp/memcached-$MEMCACHED_VERSION /tmp/memcached
+    mv /tmp/memcached-$VERSION /tmp/memcached
 
 RUN apk add gcc make musl-dev && \
     cd /tmp/libevent-$LIBEVENT_VERSION && \
