@@ -12,8 +12,7 @@ ADD https://www.memcached.org/files/memcached-$VERSION.tar.gz /tmp/memcached.tar
 RUN [ "$LIBEVENT_CHECKSUM" = "$(sha256sum /tmp/libevent.tar.gz | awk '{print $1}')" ] && \
     [ "$CHECKSUM" = "$(sha256sum /tmp/memcached.tar.gz | awk '{print $1}')" ] && \
     tar -C /tmp -xf /tmp/libevent.tar.gz && \
-    tar -C /tmp -xf /tmp/memcached.tar.gz && \
-    mv /tmp/memcached-$VERSION /tmp/memcached
+    tar -C /tmp -xf /tmp/memcached.tar.gz
 
 RUN apt update && \
     apt install -y gcc make && \
@@ -21,26 +20,27 @@ RUN apt update && \
       ./configure && \
       make && \
       make install && \
-    cd /tmp/memcached && \
+    cd /tmp/memcached-$VERSION && \
       ./configure && \
       make \
         CFLAGS="-fstack-protector-all" \
-        LDFLAGS="-lpthread -z relro -z now" && \
-    echo "nogroup:*:100:nobody" > /tmp/group && \
-    echo "nobody:*:100:100:::" > /tmp/passwd
+        LDFLAGS="-lpthread -z relro -z now"
+
+RUN mkdir -p /rootfs/etc /rootfs/lib/x86_64-linux-gnu /rootfs/lib64 && \
+    cp /tmp/memcached-$VERSION/memcached /rootfs/ && \
+    cp \
+      /lib/x86_64-linux-gnu/libc.so.6 \
+      /lib/x86_64-linux-gnu/libpthread.so.0 \
+      /usr/local/lib/libevent-2.1.so.7 \
+      /rootfs/lib/ && \
+    cp /lib64/ld-linux-x86-64.so.2 /rootfs/lib64/ && \
+    echo "nogroup:*:100:nobody" > /rootfs/etc/group && \
+    echo "nobody:*:100:100:::" > /rootfs/etc/passwd
 
 
 FROM scratch
 
-COPY --from=build --chown=100:100 /tmp/memcached/memcached /
-COPY --from=build --chown=100:100 /lib/x86_64-linux-gnu/libc.so.6 \
-                                  /lib/x86_64-linux-gnu/libpthread.so.0 \
-                                  /usr/local/lib/libevent-2.1.so.7 \
-                                  /lib/x86_64-linux-gnu/
-COPY --from=build --chown=100:100 /lib64/ld-linux-x86-64.so.2 /lib64/
-COPY --from=build --chown=100:100 /tmp/group \
-                                  /tmp/passwd \
-                                  /etc/
+COPY --from=build --chown=100:100 /rootfs /
 
 USER 100:100
 EXPOSE 11211/tcp
