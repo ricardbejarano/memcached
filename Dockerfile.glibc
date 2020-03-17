@@ -3,8 +3,8 @@ FROM debian:10 AS build
 ARG LIBEVENT_VERSION="2.1.11-stable"
 ARG LIBEVENT_CHECKSUM="a65bac6202ea8c5609fd5c7e480e6d25de467ea1917c08290c521752f147283d"
 
-ARG VERSION="1.5.22"
-ARG CHECKSUM="c2b47e9d20575a2367087c229636ffc3fb699a6c3a7f3a22f44402f25f5f1f93"
+ARG VERSION="1.6.0"
+ARG CHECKSUM="1a29d75a4004ebee92e19ad96b20100f45713c34594e25f8e8db0aecfff43e05"
 
 ADD https://github.com/libevent/libevent/releases/download/release-$LIBEVENT_VERSION/libevent-$LIBEVENT_VERSION.tar.gz /tmp/libevent.tar.gz
 ADD https://www.memcached.org/files/memcached-$VERSION.tar.gz /tmp/memcached.tar.gz
