@@ -3,11 +3,11 @@ FROM debian:10 AS build
 ARG LIBEVENT_VERSION="2.1.11-stable"
 ARG LIBEVENT_CHECKSUM="a65bac6202ea8c5609fd5c7e480e6d25de467ea1917c08290c521752f147283d"
 
-ARG VERSION="1.5.19"
-ARG CHECKSUM="3ddcdaa2d14d215f3111a7448b79c889c57618a26e97ad989581f1880a5a4be0"
+ARG VERSION="1.5.20"
+ARG CHECKSUM="cfd7b023a9cefe7ae8a67184f51d841dbbf97994ed0e8a55e31ee092320ea1e4"
 
 ADD https://github.com/libevent/libevent/releases/download/release-$LIBEVENT_VERSION/libevent-$LIBEVENT_VERSION.tar.gz /tmp/libevent.tar.gz
-ADD http://www.memcached.org/files/memcached-$VERSION.tar.gz /tmp/memcached.tar.gz
+ADD https://www.memcached.org/files/memcached-$VERSION.tar.gz /tmp/memcached.tar.gz
 
 RUN [ "$LIBEVENT_CHECKSUM" = "$(sha256sum /tmp/libevent.tar.gz | awk '{print $1}')" ] && \
     [ "$CHECKSUM" = "$(sha256sum /tmp/memcached.tar.gz | awk '{print $1}')" ] && \
