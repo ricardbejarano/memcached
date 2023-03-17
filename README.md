@@ -1,5 +1,5 @@
 <div align="center">
-	<p><img src="https://emojipedia-us.s3.dualstack.us-west-1.amazonaws.com/thumbs/160/apple/325/rabbit_1f407.png" width="100px"></p>
+	<p><img src="https://em-content.zobj.net/thumbs/160/apple/325/rabbit_1f407.png" width="100px"></p>
 	<h1>memcached</h1>
 	<p>Built-from-source container image of <a href="https://memcached.org/">Memcached</a></p>
 	<code>docker pull quay.io/ricardbejarano/memcached</code>
