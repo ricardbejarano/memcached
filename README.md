@@ -20,10 +20,10 @@
 
 Available on Docker Hub as [`docker.io/ricardbejarano/memcached`](https://hub.docker.com/r/ricardbejarano/memcached):
 
-- [`1.6.24`, `latest` *(Dockerfile)*](Dockerfile)
+- [`1.6.25`, `latest` *(Dockerfile)*](Dockerfile)
 
 ### RedHat Quay
 
 Available on RedHat Quay as [`quay.io/ricardbejarano/memcached`](https://quay.io/repository/ricardbejarano/memcached):
 
-- [`1.6.24`, `latest` *(Dockerfile)*](Dockerfile)
+- [`1.6.25`, `latest` *(Dockerfile)*](Dockerfile)
